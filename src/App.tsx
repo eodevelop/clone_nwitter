@@ -9,12 +9,17 @@ import { createGlobalStyle, styled } from "styled-components";
 import { useEffect, useState } from "react";
 import LoadingScreen from "./components/loading-screent";
 import {auth} from "./firebase";
+import ProtectedRoute from "./components/protected-route";
 
 const router = createBrowserRouter(
   [
     {
       path: "/", // "/"" 경로가 맞을때 Layout 컴포넌트를 렌더링하고, Outlet을 통해 하위 라우트를 렌더링한다.
-      element: <Layout />, 
+      element: (
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+      ),
       children: [ // Layout의 Outlet을 통해 렌더링되는 하위 라우트를 정의한다.
         {
           path: "",
