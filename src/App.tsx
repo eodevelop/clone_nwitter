@@ -1,47 +1,45 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Layout from "./components/layout";
-import Home from "./routes/home";
-import Profile from "./routes/profile";
-import Login from "./routes/login";
-import CreateAccount from "./routes/create-account";
-import reset from "styled-reset";
-import { createGlobalStyle, styled } from "styled-components";
-import { useEffect, useState } from "react";
-import LoadingScreen from "./components/loading-screent";
-import {auth} from "./firebase";
-import ProtectedRoute from "./components/protected-route";
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Layout from './components/layout';
+import Home from './routes/home';
+import Profile from './routes/profile';
+import Login from './routes/login';
+import CreateAccount from './routes/create-account';
+import reset from 'styled-reset';
+import { createGlobalStyle, styled } from 'styled-components';
+import { useEffect, useState } from 'react';
+import LoadingScreen from './components/loading-screent';
+import { auth } from './firebase';
+import ProtectedRoute from './components/protected-route';
 
-const router = createBrowserRouter(
-  [
-    {
-      path: "/", // "/"" 경로가 맞을때 Layout 컴포넌트를 렌더링하고, Outlet을 통해 하위 라우트를 렌더링한다.
-      element: (
-          <ProtectedRoute>
-            <Layout />
-          </ProtectedRoute>
-      ),
-      children: [ // Layout의 Outlet을 통해 렌더링되는 하위 라우트를 정의한다.
-        {
-          path: "",
-          element: <Home />, 
-        },
-        {
-          path: "profile",
-          element: <Profile />,
-        }
-      ]
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-      path: "/create-account",
-      element: <CreateAccount />,
-    }
-  ]
-);
-
+const router = createBrowserRouter([
+  {
+    path: '/', // "/"" 경로가 맞을때 Layout 컴포넌트를 렌더링하고, Outlet을 통해 하위 라우트를 렌더링한다.
+    element: (
+      <ProtectedRoute>
+        <Layout />
+      </ProtectedRoute>
+    ),
+    children: [
+      // Layout의 Outlet을 통해 렌더링되는 하위 라우트를 정의한다.
+      {
+        path: '',
+        element: <Home />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
+      },
+    ],
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/create-account',
+    element: <CreateAccount />,
+  },
+]);
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
@@ -67,18 +65,18 @@ function App() {
   const [isLoading, setLoading] = useState(true);
   const init = async () => {
     await auth.authStateReady();
-    setLoading(false)
-  }
+    setLoading(false);
+  };
   useEffect(() => {
     init();
   }, []);
 
   return (
-  <Wrapper>
-    <GlobalStyle />
-    {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
-  </Wrapper>
+    <Wrapper>
+      <GlobalStyle />
+      {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
+    </Wrapper>
   );
 }
 
-export default App
+export default App;

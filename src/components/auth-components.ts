@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const Wrapper = styled.div`
   height: 100vh;
@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   width: 420px;
-  padding: 50px 0px;  
+  padding: 50px 0px;
 `;
 
 export const Title = styled.h1`
@@ -28,7 +28,7 @@ export const Input = styled.input`
   border: none;
   width: 100%;
   font-size: 16px;
-  &[type="submit"] {
+  &[type='submit'] {
     cursor: pointer;
     &:hover {
       opacity: 0.8;
@@ -47,4 +47,3 @@ export const Switcher = styled.span`
     color: #1d9bf0;
   }
 `;
-
